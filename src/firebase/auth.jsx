@@ -1,4 +1,5 @@
 // src/firebase/auth.jsx
+import { send } from 'vite';
 import {auth} from './firebase';
 import {
     createUserWithEmailAndPassword,
@@ -17,9 +18,25 @@ export const doSignInWithEmailAndPassword = async (email, password) => {
 
 export const doSignInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    return await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    
+    return result
 };
 
 export const doSignOut = () => {
     return auth.signOut();
 };
+
+// export const doPasswordReset = (email) => {
+//     return sendPasswordResetEmail(auth, email);
+// };
+
+// export const doPasswordChange = (password) => {
+//     return updatePassword(auth.currentUser, password);
+// }
+
+// export const doSendEmailVerification = () => {
+//     return sendEmailVerification(auth.currentUser, {
+//         url: '${window.location.orgin}/home',
+//         });
+// }
