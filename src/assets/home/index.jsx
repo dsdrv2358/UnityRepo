@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../authContext/index.jsx'
+import { useAuth } from '../../contexts/authContext/index.jsx'
 
 const Home = () => {
     const { currentUser } = useAuth()

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
-import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth.jsx'
-import { useAuth } from '../authContext/index.jsx'
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../../firebase/auth.jsx'
+import { useAuth } from '../../../contexts/authContext'
 
 const Login = () => {
     const { userLoggedIn } = useAuth()
@@ -29,11 +29,7 @@ const Login = () => {
         e.preventDefault();
         if (!isSigningIn) {
             setIsSigningIn(true);
-            doSignInWithGoogle()
-                .catch(() => {
-                    setErrorMessage('Google sign-in failed. Please try again.');
-                })
-                .finally(() => {
+            doSignInWithGoogle().catch(err => {
                     setIsSigningIn(false);
                 });
         }
