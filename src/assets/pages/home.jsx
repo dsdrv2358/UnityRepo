@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {firestore} from '../firebase/firebase.jsx'
 import {addDoc, collection} from "firebase/firestore"
-//tryagain
+
 export default function Home(){
     const messageRef = useRef();
     const ref = collection(firestore,"message")
