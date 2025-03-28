@@ -1,13 +1,31 @@
-import React from 'react';
-import { useAuth} from '../../contexts/authContext';
+import React, {useRef} from 'react';
+import {firestore} from '../firebase/firebase.jsx'
+import {addDoc, collection} from "firebase/firestore"
 
-const Home = () => {
-    const { currentUser } = useAuth();
-    return (
-        <div className='text-2x1 font-bold pt-14'>
-            Hello {currentUser.displayName ? currentUser.displayName : currentUser.email}, you are now logged in.
-        </div>
-    );
+export default function Home(){
+    const messageRef = useRef();
+    const ref = collection(firestore,"message")
+    const handleSave = async(e) => {
+        e.preventDefault();
+        console.log(messageRef.current.value);
+
+        let data = {
+            message: messageRef.current.value,
+        }
+
+        try{
+            await addDoc(ref, data);
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+
+    return(
+       <form onSubmit={handleSave}>
+           <label>Welcome</label>
+           <input type='text' ref={messageRef} />
+           <button type="submit">Save</button>
+       </form>
+    )
 }
-
-export default Home;
