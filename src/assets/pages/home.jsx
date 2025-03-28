@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {firestore} from '../firebase/firebase.jsx'
-import {addDoc, collection} from "@firebase/firestore"
+import {addDoc, collection} from "firebase/firestore"
 
 export default function Home(){
     const messageRef = useRef();
@@ -14,7 +14,7 @@ export default function Home(){
         }
 
         try{
-            addDoc(ref,data);
+            await addDoc(ref, data);
         }
         catch(e){
             console.log(e)
